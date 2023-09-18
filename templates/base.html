@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>
+        {% block title%} Epifron {% endblock %}
+        </title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static '/pico.min.css' %}">
+        <link rel="stylesheet" href="{% static '/style.css' %}">
+    </head>
+
+    <body>
+        {% if user.is_authenticated %}
+            
+            <nav>
+                <ul>
+                    <li>
+                        <strong>Epifron</strong>
+                    </li>
+                    <li>
+                        <a href="/tickets">
+                            My tickets
+                        </a>
+                    </li>
+                </ul>
+                <ul>
+                    <li> 
+                        <a href="{% url 'addTicket' %}">
+                            + New ticket
+                        </a>
+                    </li>
+                    <li> 
+                        <a href="{% url 'logout' %}" role="button">
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+          
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <main class="container">
+        <article class="grid" style="padding:0">
+            <div style="padding:2rem">
+                <hgroup>
+                    <h1> 
+                        Login
+                    </h1>
+                    <h2>Enter your username and password</h2>
+                </hgroup>
+                {% if form.errors %}
+                <p>Your username and password didn't match. Please try again.</p>
+                {% endif %}
+    
+                <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                    
+                    <label for="firstname">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                    </label>
+                
+                    <label for="lastname">
+                        {{ form.password.label_tag }}
+                        {{ form.password }}
+                    </label>
+    
+                    <input type="submit" value="login">
+                    <input type="hidden" name="next" value="{{ next }}">
+                </form>
+    
+                {# Assumes you set up the password_reset view in your URLconf #}
+                <!--
+                    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+                -->
+            </div>
+
+            {% load static %}
+
+            <div class="login-img-background" style="padding:2rem">
+
+            </div>
+            
+
+        </article>
+
+</main>
+{% endblock %}
