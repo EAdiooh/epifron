@@ -18,3 +18,5 @@ class Ticket(models.Model):
     created_at = models.DateTimeField("created at")
     last_update = models.DateTimeField("last update", null=True)
 
+    def __str__(self):
+        return self.subject

@@ -4,54 +4,33 @@
 
 {% block content %}
 
-<main class="container-fluid">
+<main class="container-fluid" style="padding-top: 15px">
+    <h3 style="margin-bottom: 0">
+        Your tickets
+    </h3>
     <table role="grid">
         <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">Heading</th>
-            <th scope="col">Heading</th>
-            <th scope="col">Heading</th>
-            <th scope="col">Heading</th>
-            <th scope="col">Heading</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status</th>
+            <th scope="col">Assignee</th>
+            <th scope="col">Responsible</th>
+            <th scope="col">Last Update</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-        </tr>
-        <tr>
-            <th scope="row">1</th>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-        </tr>
-        <tr>
-            <th scope="row">1</th>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-        </tr>
+            {% for ticket in user_tickets%}
+            <tr>
+                <td>{{ticket.subject}}</td>
+                <td>{{ticket.description}}</td>
+                <td>{{ticket.status}}</td>
+                <td>{{ticket.assignee | default_if_none:"Not assigned yet"}}</td>
+                <td>{{ticket.responsible | default_if_none:"Not assigned yet"}}</td>
+                <td>{{ticket.last_update | default_if_none:"No operation yet"}}</td>
+            </tr>
+            {% endfor %}
         </tbody>
-        <tfoot>
-        <tr>
-            <th scope="col">#</th>
-            <td scope="col">Total</td>
-            <td scope="col">Total</td>
-            <td scope="col">Total</td>
-            <td scope="col">Total</td>
-            <td scope="col">Total</td>
-        </tr>
-        </tfoot>
   </table>
 </main>
     

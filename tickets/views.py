@@ -5,7 +5,9 @@ from .models import Ticket
 import datetime
 
 def index(request):
-    return render(request, "tickets/tickets.html")
+    user_tickets = Ticket.objects.filter(requestor = request.user)
+    context = {"user_tickets": user_tickets}
+    return render(request, "tickets/tickets.html", context)
  
 def addTicket(request):
     if request.method == "POST":
