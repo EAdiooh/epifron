@@ -4,34 +4,14 @@
 
 {% block content %}
 
+
 <main class="container-fluid" style="padding-top: 15px">
     <h3 style="margin-bottom: 0">
         Your tickets
     </h3>
-    <table role="grid">
-        <thead>
-        <tr>
-            <th scope="col">Subject</th>
-            <th scope="col">Description</th>
-            <th scope="col">Status</th>
-            <th scope="col">Assignee</th>
-            <th scope="col">Responsible</th>
-            <th scope="col">Last Update</th>
-        </tr>
-        </thead>
-        <tbody>
-            {% for ticket in user_tickets%}
-            <tr>
-                <td>{{ticket.subject}}</td>
-                <td>{{ticket.description}}</td>
-                <td>{{ticket.status}}</td>
-                <td>{{ticket.assignee | default_if_none:"Not assigned yet"}}</td>
-                <td>{{ticket.responsible | default_if_none:"Not assigned yet"}}</td>
-                <td>{{ticket.last_update | default_if_none:"No operation yet"}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-  </table>
+    
+    {% include 'tickets/table.html' %}
+  
 </main>
     
 

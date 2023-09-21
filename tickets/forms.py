@@ -9,4 +9,4 @@ class AddTicketForm(ModelForm):
 
 def addTicket(request):
     form = AddTicketForm(request.POST)
-    print(form.cleaned_data['subject'])
+    

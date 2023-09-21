@@ -9,6 +9,7 @@ class TicketStatus(models.TextChoices):
     DONE = 'Done'
 
 class Ticket(models.Model):
+    id = models.BigAutoField(primary_key=True)
     subject = models.CharField(max_length=100)
     requestor = models.ForeignKey(User, related_name="requestor", null=False, blank = True, on_delete=models.CASCADE)
     description = models.TextField()

@@ -1,0 +1,59 @@
+{% load tickets_extras %}
+<table role="grid" id="table">
+    <thead>
+    <tr>
+        <th scope="col">Subject</th>
+        <th scope="col">Description</th>
+        <th scope="col">Status</th>
+        <th scope="col">Assignee</th>
+        <th scope="col">Responsible</th>
+        <th scope="col">Last Update</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for ticket in user_tickets%}
+        <tr>
+            <td>{{ticket.subject}}</td>
+            <td>{{ticket.description}}</td>
+            <td>{{ticket.status}}</td>
+            <td>
+                {% if request.user|has_group:"responsible" %}
+                <select required
+                        hx-post="{% url 'updateTicketAssignee' %}"
+                        hx-vars='{"ticket_id":"{{ ticket.id }}"}'
+                        hx-trigger="change"
+                        name='technician'
+                        hx-target="#table"
+                        hx-swap="outerHTML">
+                    <option selected='{{ticket.assignee}}' disabled >Not assigned yet</option>
+                    {% for technician in technicians %}
+                        <option value="{{technician.username}}" {% if technician == ticket.assignee %}selected="selected"{% endif %}>{{technician.username}}</option>
+                    {% endfor %}
+                </select>
+                {% else %}
+                {{ticket.assignee | default_if_none:"Not assigned yet"}}
+                {% endif %}
+            </td>
+            <td>
+                {% if request.user|has_group:"responsible" %}
+                <select required
+                        hx-post="{% url 'updateTicketResponsible' %}"
+                        hx-vars='{"ticket_id":"{{ ticket.id }}"}'
+                        hx-trigger="change"
+                        name='responsible'
+                        hx-target="#table"
+                        hx-swap="outerHTML">
+                    <option selected='{{ticket.assignee}}' disabled >Not assigned yet</option>
+                    {% for responsible in responsibles %}
+                        <option value="{{responsible.username}}" {% if responsible == ticket.responsible %}selected="selected"{% endif %}>{{responsible.username}}</option>
+                    {% endfor %}
+                </select>
+                {% else %}
+                    {{ticket.responsible | default_if_none:"Not assigned yet"}}
+                {% endif %}
+            </td>
+            <td>{{ticket.last_update | default_if_none:"No operation yet"}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
