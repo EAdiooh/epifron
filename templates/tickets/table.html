@@ -8,6 +8,9 @@
         <th scope="col">Assignee</th>
         <th scope="col">Responsible</th>
         <th scope="col">Last Update</th>
+        {% if request.user|has_group:"technician" %}
+        <th scope="col"></th>
+        {% endif %}
     </tr>
     </thead>
     <tbody>
@@ -15,7 +18,24 @@
         <tr>
             <td>{{ticket.subject}}</td>
             <td>{{ticket.description}}</td>
-            <td>{{ticket.status}}</td>
+
+            <td>
+                {% if request.user|has_group:"technician" %}
+                    <select required
+                            hx-post="{% url 'updateTicketStatus' %}"
+                            hx-vars='{"ticket_id":"{{ ticket.id }}"}'
+                            hx-trigger="change"
+                            name='status'
+                            hx-target="#table"
+                            hx-swap="outerHTML">
+                        {% for status in ticket_status %}
+                            <option value="{{status}}" {% if status == ticket.status %} selected="selected"{% endif %}>{{status}}</option>
+                        {% endfor %}
+                    </select>
+                {% else %}
+                    {{ticket.status}}
+                {% endif %}
+            </td>
             <td>
                 {% if request.user|has_group:"responsible" %}
                 <select required
@@ -52,7 +72,17 @@
                     {{ticket.responsible | default_if_none:"Not assigned yet"}}
                 {% endif %}
             </td>
-            <td>{{ticket.last_update | default_if_none:"No operation yet"}}</td>
+            <td>
+                {{ticket.last_update | default_if_none:"No operation yet"}}
+            </td>
+
+            {% if request.user|has_group:"technician" %}
+            <td scope="col">
+                <a href="{% url 'registerIntervention' ticket.id %}" role="button">
+                    Work on it
+                </a>
+            </td>
+            {% endif %}
         </tr>
         {% endfor %}
     </tbody>

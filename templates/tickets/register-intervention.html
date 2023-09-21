@@ -1,13 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %} Add new ticket {% endblock %}
+{% block title %} REgister an intervention on the ticket {% endblock %}
 
 {% block content %}
     <main class="container-fluid" style="padding-top:35px;padding-bottom:35px">
-        <h3 style="margin-bootm:25px">
-            Enter the information for your ticket 
-        </h3>
-        <form method="post" action="{% url 'addTicket' %}">
+
+        <form method="post" action="{% url 'registerIntervention' ticket.id %}">
             {% csrf_token %}
             {{form.as_table}}
 
