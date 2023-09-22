@@ -65,3 +65,7 @@ select{
   padding: 5px;
   margin-bottom: 0;
 }
+
+[role="button"] {
+  padding: 5px
+}

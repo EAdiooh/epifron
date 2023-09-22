@@ -103,3 +103,9 @@ def registerIntervention(request, ticket_id):
         form = RegisterInterventionForm()
         context = {"form": form, "ticket": ticket}
     return render(request, "tickets/register-intervention.html", context)
+
+def displayIntervention(request, ticket_id):
+    ticket = Ticket.objects.get(pk=ticket_id)
+    ticket_interventions = TicketIntervention.objects.filter(ticket_id = ticket)
+    context = {"ticket_interventions": ticket_interventions, "ticket":ticket}
+    return render(request, "tickets/display-intervention.html", context)

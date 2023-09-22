@@ -10,9 +10,7 @@
         <th scope="col">Assignee</th>
         <th scope="col">Responsible</th>
         <th scope="col">Last Update</th>
-        {% if request.user|has_group:"technician" %}
         <th scope="col"></th>
-        {% endif %}
     </tr>
     </thead>
     <tbody>
@@ -82,6 +80,12 @@
             <td scope="col">
                 <a href="{% url 'registerIntervention' ticket.id %}" role="button">
                     Work on it
+                </a>
+            </td>
+            {% else %}
+            <td scope="col">
+                <a href="{% url 'displayIntervention' ticket.id %}" role="button">
+                    Details
                 </a>
             </td>
             {% endif %}
