@@ -53,3 +53,15 @@ nav{
     background-position: center;
     background-size: cover;
 }
+
+.tableContainer {
+  max-height: 70vh;
+  overflow: scroll
+}
+
+thead th { position: sticky; top: 0; background-color: #ff9900; color:#f4f4f4 ;}
+
+select{
+  padding: 5px;
+  margin-bottom: 0;
+}

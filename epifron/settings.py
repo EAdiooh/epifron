@@ -59,8 +59,9 @@ ROOT_URLCONF = 'epifron.urls'
 
 STATIC_URL = BASE_DIR / "static"
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
     os.path.join(BASE_DIR, "static"),
+    BASE_DIR / "static",
+    
 ]
 
 TEMPLATES = [
