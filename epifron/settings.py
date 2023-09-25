@@ -80,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-LOGIN_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "index"
 LOGOUT_REDIRECT_URL = "login"
 
 WSGI_APPLICATION = 'epifron.wsgi.application'

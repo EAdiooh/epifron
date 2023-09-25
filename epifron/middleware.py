@@ -23,4 +23,4 @@ class LoginRequiredMiddleware(MiddlewareMixin):
             if not current_route_name in settings.AUTH_EXEMPT_ROUTES:
                 return HttpResponseRedirect(reverse(settings.AUTH_LOGIN_ROUTE))
         elif request.user.is_authenticated and resolve(request.path_info).url_name == settings.AUTH_LOGIN_ROUTE:
-            return HttpResponseRedirect(reverse('home'))
+            return HttpResponseRedirect(reverse('index'))
