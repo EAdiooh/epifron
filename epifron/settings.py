@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'epifron.middleware.LoginRequiredMiddleware',
 ]
 
-AUTH_EXEMPT_ROUTES = ('register', 'login', 'forgot-password', 'home')
+AUTH_EXEMPT_ROUTES = ('register', 'login', 'forgot-password')
 AUTH_LOGIN_ROUTE = 'login'
 
 ROOT_URLCONF = 'epifron.urls'
